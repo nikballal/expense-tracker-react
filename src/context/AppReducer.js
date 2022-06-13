@@ -9,6 +9,13 @@ export default (state, action) => {
           (transaction) => transaction.id !== action.payload
         ),
       };
+
+    //add the new (action.payload) to the existing set of transactions in an array
+    case "ADD_TRANSACTION":
+      return {
+        ...state,
+        transactions: [action.payload, ...state.transactions],
+      };
     default:
       return state;
   }
