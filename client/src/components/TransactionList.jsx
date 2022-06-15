@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { GlobalContext } from "../context/GlobalState";
 import Transaction from "./Transaction";
 
 const TransactionList = () => {
-  const { transactions } = useContext(GlobalContext); //destructure context, instead of context.transactions, use destructured {transactions}
+  const { transactions, getTransactions } = useContext(GlobalContext); //destructure context, instead of context.transactions, use destructured {transactions}
+
+  useEffect(() => {
+    getTransactions();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -18,3 +23,5 @@ const TransactionList = () => {
 };
 
 export default TransactionList;
+
+//for an async call like 'getTransactions', need to use, useEffect (making a http request from a component)
